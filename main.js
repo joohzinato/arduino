@@ -66,27 +66,29 @@ const serial = async (
             //     );
             //     console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
 
-                //    for (contagem = 0; contagem <=5; contagem++) {
-                //      await poolBancoDados.execute(
-                //          `INSERT INTO Sensor (fkCaminhao) VALUES (1)`,
+            //    for (contagem = 0; contagem <=5; contagem++) {
+            //      await poolBancoDados.execute(
+            //          `INSERT INTO Sensor (fkCaminhao) VALUES (1)`,
 
-                //          );
-                //        console.log('criado com sucesso')
-                //        break;
-                //  }
-                
-                for (contagem = 1; contagem <=5; contagem++) {
-                    await poolBancoDados.execute(
-                        `INSERT INTO caminhao (marca, nomeCaminhao, placa) VALUES ('null', 'null', 'null')`,
+            //          );
+            //        console.log('criado com sucesso')
+            //        break;
+            //  }
 
-                    );
-                    console.log('criado caminhao com sucesso')
-            }
- 
+            for (var contagem = 1; contagem <= 5; contagem++) {
+                await poolBancoDados.execute(
+                    `INSERT INTO caminhao (marca, nomeCaminhao, placa) VALUES ('null', 'null', 'null')`,
+
+                );
+                console.log('criado caminhao com sucesso')
 
             }
+            // HABILITAR_OPERACAO_INSERIR = false;
 
-        });
+
+        }
+
+    });
     arduino.on('error', (mensagem) => {
         console.error(`Erro no arduino (Mensagem: ${mensagem}`)
     });
