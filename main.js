@@ -18,9 +18,9 @@ const serial = async (
         {
             host: 'localhost',
             port: 3306,
-            user: 'icelog',
-            password: 'grupo1_Icelog',
-            database: 'icelog'
+            user: 'acquatec',
+            password: '123Teste',
+            database: 'acquatec'
         }
     ).promise();
 
@@ -46,10 +46,10 @@ const serial = async (
         const lm35Temperatura = parseFloat(valores[3]);
         const chave = parseInt(valores[4]);
 
-        const dht11Umidade2 = dht11Umidade * 0.80;
-        const dht11Temperatura2 = dht11Temperatura * 0.80;
-        const luminosidade2 = luminosidade * 0.80;
-        const lm35Temperatura2 = lm35Temperatura * 0.80;
+        const dht11Umidade2 = dht11Umidade * 3;
+        const dht11Temperatura2 = dht11Temperatura * 3;
+        const luminosidade2 = luminosidade * 3;
+        const lm35Temperatura2 = lm35Temperatura * 3;
         const chave2 = !chave;
 
         valoresDht11Umidade.push(dht11Umidade);
@@ -59,12 +59,20 @@ const serial = async (
         valoresChave.push(chave);
 
         if (HABILITAR_OPERACAO_INSERIR) {
-            // for (contagem = 5000; contagem <= 5050; contagem++) {
-            //     await poolBancoDados.execute(
-            //         `INSERT INTO dado (dht11_umidade, dht11_temperatura, luminosidade, lm35_temperatura, chave, fkSensor) VALUES (?, ?, ?, ?, ?, ${contagem})`,
-            //         [dht11Umidade * 0.8, dht11Temperatura * 0.8, luminosidade * 0.8, lm35Temperatura * 0.8, chave]
-            //     );
-            //     console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
+
+            for (contagem = 1; contagem <= 4; contagem++) {
+                await poolBancoDados.execute(
+                    `INSERT INTO medida (dht11_umidade, dht11_temperatura, luminosidade, lm35_temperatura, chave, fk_aquario) values (?, ?, ?, ?, ?, ${contagem})`,
+                    [dht11Umidade * 1, dht11Temperatura * 1, luminosidade * 1, lm35Temperatura * 1, chave]
+                );
+                console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
+                // await poolBancoDados.execute(
+                //     `INSERT INTO medida (dht11_umidade, dht11_temperatura, luminosidade, lm35_temperatura, chave, fk_aquario) values (?, ?, ?, ?, ?, 2)`,
+                //     [dht11Umidade2, dht11Temperatura2, luminosidade2, lm35Temperatura2, chave2]
+                // );
+                // console.log("valores inseridos no banco2: ", dht11Umidade2 + ", " + dht11Temperatura2 + ", " + luminosidade2 + ", " + lm35Temperatura2 + ", " + chave2)
+            }
+            
 
             //    for (contagem = 0; contagem <=5; contagem++) {
             //      await poolBancoDados.execute(
@@ -75,14 +83,14 @@ const serial = async (
             //        break;
             //  }
 
-            for (var contagem = 1; contagem <= 5; contagem++) {
-                await poolBancoDados.execute(
-                    `INSERT INTO caminhao (marca, nomeCaminhao, placa) VALUES ('null', 'null', 'null')`,
+            // for (var contagem = 1; contagem <= 5; contagem++) {
+            //     await poolBancoDados.execute(
+            //         `INSERT INTO caminhao (marca, nomeCaminhao, placa) VALUES ('null', 'null', 'null')`,
 
-                );
-                console.log('criado caminhao com sucesso')
+            //     );
+            //     console.log('criado caminhao com sucesso')
 
-            }
+            // }
             // HABILITAR_OPERACAO_INSERIR = false;
 
 
