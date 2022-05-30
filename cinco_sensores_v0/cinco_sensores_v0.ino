@@ -33,7 +33,10 @@ void loop()
   float temperatura = dht_1.readTemperature();
   if (isnan(temperatura) or isnan(umidade)) 
   {
-    Serial.println("Erro ao ler o DHT");
+    Serial.print(0);
+    Serial.print(";");
+    Serial.print(0);
+    Serial.print(";");
   } 
   else
   {
